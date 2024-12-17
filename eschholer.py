@@ -5,15 +5,15 @@ import seaborn as sns
 from scipy.stats import pearsonr, spearmanr
 
 # Load datasets
-population_data = pd.read_csv("C:\Users\krish\Downloads\global_population_urbanization_gdp.csv")
-urbanization_data = pd.read_csv("C:\Users\krish\Downloads\global_population_urbanization_gdp.csv")       
-gdp_data = pd.read_csv("C:\Users\krish\Downloads/global_population_urbanization_gdp.csv")                        
+population_data = pd.read_csv("global_population_urbanization_gdp.csv")
+urbanization_data = pd.read_csv("global_population_urbanization_gdp.csv")       
+gdp_data = pd.read_csv("global_population_urbanization_gdp.csv")                        
 
 
 data = population_data.merge(urbanization_data, on=["Country", "Year"], how="inner")
 data = data.merge(gdp_data, on=["Country", "Year"], how="inner")
 
-# Renaming columns for clarity
+
 data.rename(columns={
     "Population Growth (%)": "Population Growth",
     "Urbanization (%)": "Urbanization",
@@ -48,7 +48,7 @@ plt.ylabel("GDP (in USD)")
 plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
 plt.show()
 
-# Correlation Analysis
+
 population_urban_corr, _ = pearsonr(data["Population Growth"], data["Urbanization"])
 population_gdp_corr, _ = pearsonr(data["Population Growth"], data["GDP"])
 urbanization_gdp_corr, _ = pearsonr(data["Urbanization"], data["GDP"])
@@ -57,7 +57,6 @@ print(f"\nCorrelation between Population Growth and Urbanization: {population_ur
 print(f"Correlation between Population Growth and GDP: {population_gdp_corr:.2f}")
 print(f"Correlation between Urbanization and GDP: {urbanization_gdp_corr:.2f}")
 
-# Scatter plots for correlation
 plt.figure(figsize=(10, 6))
 sns.scatterplot(data=data, x="Urbanization", y="Population Growth", hue="GDP", size="GDP", sizes=(20, 200), palette="viridis")
 plt.title("Population Growth vs Urbanization")
@@ -74,9 +73,8 @@ plt.ylabel("Population Growth (%)")
 plt.colorbar(label="Urbanization")
 plt.show()
 
-# Spearman rank correlation (alternative to Pearson for non-linear relationships)
+
 spearman_corr, _ = spearmanr(data["Population Growth"], data["Urbanization"])
 print(f"\nSpearman correlation between Population Growth and Urbanization: {spearman_corr:.2f}")
 
-# Conclusion
 print("\nAnalysis complete. Review visualizations and correlations to interpret results.")
