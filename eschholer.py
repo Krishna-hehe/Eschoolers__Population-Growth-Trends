@@ -73,6 +73,11 @@ plt.ylabel("Population Growth (%)")
 plt.colorbar(label="Urbanization")
 plt.show()
 
+file_path = 'global_population_urbanization_gdp.csv.csv'
+data = pd.read_csv(file_path)
+
+data.head()
+
 
 spearman_corr, _ = spearmanr(data["Population Growth"], data["Urbanization"])
 print(f"\nSpearman correlation between Population Growth and Urbanization: {spearman_corr:.2f}")
