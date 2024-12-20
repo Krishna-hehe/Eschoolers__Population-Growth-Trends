@@ -57,21 +57,42 @@ print(f"\nCorrelation between Population Growth and Urbanization: {population_ur
 print(f"Correlation between Population Growth and GDP: {population_gdp_corr:.2f}")
 print(f"Correlation between Urbanization and GDP: {urbanization_gdp_corr:.2f}")
 
+
 plt.figure(figsize=(10, 6))
-sns.scatterplot(data=data, x="Urbanization", y="Population Growth", hue="GDP", size="GDP", sizes=(20, 200), palette="viridis")
+scatter = sns.scatterplot(
+    data=data,
+    x="Urbanization",
+    y="Population Growth",
+    hue="GDP",
+    size="GDP",
+    sizes=(20, 200),
+    palette="viridis"
+)
+scatter.legend_.remove()  
 plt.title("Population Growth vs Urbanization")
 plt.xlabel("Urbanization (%)")
 plt.ylabel("Population Growth (%)")
-plt.colorbar(label="GDP")
+cbar = plt.colorbar(scatter.collections[0], label="GDP")
 plt.show()
 
+
 plt.figure(figsize=(10, 6))
-sns.scatterplot(data=data, x="GDP", y="Population Growth", hue="Urbanization", size="Urbanization", sizes=(20, 200), palette="plasma")
+scatter = sns.scatterplot(
+    data=data,
+    x="GDP",
+    y="Population Growth",
+    hue="Urbanization",
+    size="Urbanization",
+    sizes=(20, 200),
+    palette="plasma"
+)
+scatter.legend_.remove()
 plt.title("Population Growth vs GDP")
 plt.xlabel("GDP (in USD)")
 plt.ylabel("Population Growth (%)")
-plt.colorbar(label="Urbanization")
+cbar = plt.colorbar(scatter.collections[0], label="Urbanization")
 plt.show()
+
 
 file_path = 'global_population_urbanization_gdp.csv.csv'
 data = pd.read_csv(file_path)
