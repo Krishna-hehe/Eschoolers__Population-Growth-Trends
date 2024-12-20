@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import pearsonr, spearmanr
 
-# Load datasets
+
 population_data = pd.read_csv("global_population_urbanization_gdp.csv")
 urbanization_data = pd.read_csv("global_population_urbanization_gdp.csv")       
 gdp_data = pd.read_csv("global_population_urbanization_gdp.csv")                        
